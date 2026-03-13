@@ -1,31 +1,25 @@
 pipeline {
-agent any
-stages {
-stage('Checkout') {
-steps {
-// Récupère le code depuis le dépôt GitHub
-git
-'https://github.com/yourusername/yourrepository.git'
-}
-}
-stage('Compile') {
-steps {
-script {
-// Compile le code Java
-sh 'javac HelloWorld.java'
-
-}
-}
-}
-stage('Run') {
-steps {
-script {
-// Exécute le code Java compilé
-
-sh 'java HelloWorld'
-
-}
-}
-}
-}
+    agent any
+    stages {
+        stage('Compile') {
+            steps {
+                // On vérifie si le fichier existe et on compile
+                sh 'javac HelloWorld.java'
+            }
+        }
+        stage('Run') {
+            steps {
+                // On exécute la classe compilée
+                sh 'java HelloWorld'
+            }
+        }
+    }
+    post {
+        success {
+            echo 'Bravo ! Le programme Java a fonctionné.'
+        }
+        failure {
+            echo 'Erreur de compilation ou d\'exécution.'
+        }
+    }
 }
