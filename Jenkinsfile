@@ -1,26 +1,31 @@
 pipeline {
-    agent any
+agent any
+stages {
+stage('Checkout') {
+steps {
+// Récupère le code depuis le dépôt GitHub
+git
+'https://github.com/yourusername/yourrepository.git'
+}
+}
+stage('Compile') {
+steps {
+script {
+// Compile le code Java
+sh 'javac HelloWorld.java'
 
-    stages {
-        stage('Compile') {
-            steps {
-                // Pas besoin de stage "Checkout", Jenkins le fait déjà seul
-                sh 'javac HelloWorld.java'
-            }
-        }
-        stage('Run') {
-            steps {
-                sh 'java HelloWorld'
-            }
-        }
-    }
-    
-    post {
-        success {
-            echo ' Succès !'
-        }
-        failure {
-            echo ' Échec.'
-        }
-    }
+}
+}
+}
+stage('Run') {
+steps {
+script {
+// Exécute le code Java compilé
+
+sh 'java HelloWorld'
+
+}
+}
+}
+}
 }
