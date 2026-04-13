@@ -1,25 +1,33 @@
 pipeline {
     agent any
-    stages {
-        stage('Compile') {
-            steps {
-                // On vérifie si le fichier existe et on compile
-                sh 'javac HelloWorld.java'
-            }
-        }
-        stage('Run') {
-            steps {
-                // On exécute la classe compilée
-                sh 'java HelloWorld'
-            }
-        }
+
+    environment {
+        ANSIBLE_INVENTORY = 'hosts.ini'
+        ANSIBLE_PLAYBOOK  = 'playbook.yml'
     }
-    post {
-        success {
-            echo 'Bravo ! Le programme Java a fonctionné.'
+
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
         }
-        failure {
-            echo 'Erreur de compilation ou d\'exécution.'
+
+        stage('Vérification Environnement') {
+            steps {
+                sh 'ansible --version'
+            }
+        }
+
+        stage('Run Ansible Playbook') {
+            steps {
+                ansiblePlaybook(
+                    playbook: "${ANSIBLE_PLAYBOOK}",
+                    inventory: "${ANSIBLE_INVENTORY}",
+                    installation: 'ansible',
+                    colorized: true
+                )
+            }
         }
     }
 }
