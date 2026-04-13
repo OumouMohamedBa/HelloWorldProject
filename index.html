@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Serveur déployé par Jenkins & Ansible</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #0d1117;
+      color: #e6edf3;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .container {
+      text-align: center;
+      padding: 60px 40px;
+      max-width: 800px;
+      width: 100%;
+    }
+
+    .badge-row {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      padding: 8px 20px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .badge-jenkins {
+      background: #d33833;
+      color: #fff;
+    }
+
+    .badge-ansible {
+      background: #ee0000;
+      color: #fff;
+    }
+
+    .badge-success {
+      background: #238636;
+      color: #fff;
+    }
+
+    .icon {
+      font-size: 1.1rem;
+    }
+
+    h1 {
+      font-size: 2.4rem;
+      font-weight: 700;
+      line-height: 1.3;
+      margin-bottom: 20px;
+      color: #f0f6fc;
+    }
+
+    h1 span {
+      background: linear-gradient(90deg, #58a6ff, #bc8cff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .subtitle {
+      font-size: 1.1rem;
+      color: #8b949e;
+      margin-bottom: 50px;
+    }
+
+    .cards {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 50px;
+    }
+
+    .card {
+      background: #161b22;
+      border: 1px solid #30363d;
+      border-radius: 12px;
+      padding: 28px 32px;
+      min-width: 180px;
+      flex: 1;
+      max-width: 220px;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .card:hover {
+      border-color: #58a6ff;
+      transform: translateY(-4px);
+    }
+
+    .card-icon {
+      font-size: 2rem;
+      margin-bottom: 12px;
+    }
+
+    .card-title {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #8b949e;
+      margin-bottom: 6px;
+    }
+
+    .card-value {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #e6edf3;
+    }
+
+    .terminal {
+      background: #010409;
+      border: 1px solid #30363d;
+      border-radius: 10px;
+      padding: 24px 28px;
+      text-align: left;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.9rem;
+      margin-bottom: 40px;
+    }
+
+    .terminal-header {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+
+    .dot-red   { background: #ff5f57; }
+    .dot-yellow{ background: #febc2e; }
+    .dot-green { background: #28c840; }
+
+    .line {
+      margin-bottom: 6px;
+    }
+
+    .prompt { color: #58a6ff; }
+    .cmd    { color: #e6edf3; }
+    .ok     { color: #3fb950; }
+    .info   { color: #8b949e; }
+
+    .status-bar {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #161b22;
+      border: 1px solid #238636;
+      border-radius: 8px;
+      padding: 12px 24px;
+      font-size: 0.95rem;
+      color: #3fb950;
+      font-weight: 600;
+    }
+
+    .pulse {
+      width: 10px;
+      height: 10px;
+      background: #3fb950;
+      border-radius: 50%;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: 0.5; transform: scale(1.4); }
+    }
+
+    footer {
+      margin-top: 50px;
+      font-size: 0.8rem;
+      color: #484f58;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <div class="badge-row">
+      <div class="badge badge-jenkins">
+        <span class="icon">⚙️</span> Jenkins CI/CD
+      </div>
+      <div class="badge badge-ansible">
+        <span class="icon">📦</span> Ansible
+      </div>
+      <div class="badge badge-success">
+        <span class="icon">✅</span> Déploiement réussi
+      </div>
+    </div>
+
+    <h1>Bienvenue sur mon serveur<br><span>déployé par Jenkins & Ansible !</span></h1>
+    <p class="subtitle">Infrastructure as Code · Automatisation · DevOps</p>
+
+    <div class="cards">
+      <div class="card">
+        <div class="card-icon">🚀</div>
+        <div class="card-title">Pipeline</div>
+        <div class="card-value">Jenkins</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">🤖</div>
+        <div class="card-title">Provisioning</div>
+        <div class="card-value">Ansible</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">🌐</div>
+        <div class="card-title">Serveur web</div>
+        <div class="card-value">Apache / Nginx</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">🔒</div>
+        <div class="card-title">Statut</div>
+        <div class="card-value">En ligne</div>
+      </div>
+    </div>
+
+    <div class="terminal">
+      <div class="terminal-header">
+        <div class="dot dot-red"></div>
+        <div class="dot dot-yellow"></div>
+        <div class="dot dot-green"></div>
+      </div>
+      <div class="line"><span class="prompt">jenkins@pipeline:~$</span> <span class="cmd">ansible-playbook deploy.yml -i inventory/hosts</span></div>
+      <div class="line"><span class="info">PLAY [webservers] **********************************</span></div>
+      <div class="line"><span class="info">TASK [Copying index.html] **************************</span></div>
+      <div class="line"><span class="ok">ok: [webserver01]</span></div>
+      <div class="line"><span class="info">TASK [Restart web service] *************************</span></div>
+      <div class="line"><span class="ok">changed: [webserver01]</span></div>
+      <div class="line"><span class="info">PLAY RECAP *****************************************</span></div>
+      <div class="line"><span class="ok">webserver01 : ok=3  changed=1  unreachable=0  failed=0</span></div>
+    </div>
+
+    <div class="status-bar">
+      <div class="pulse"></div>
+      Serveur opérationnel
+    </div>
+
+    <footer>
+      <p>Déployé automatiquement via pipeline CI/CD · Jenkins + Ansible</p>
+    </footer>
+
+  </div>
+</body>
+</html>
