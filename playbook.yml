@@ -1,1 +1,22 @@
+---
+- name: Deploy application
+  hosts: web
+  become: yes  # Pour installer apache2 avec sudo
+  
+  tasks:
+    - name: Mise à jour du cache apt
+      apt:
+        update_cache: yes
 
+    - name: Installation de Apache2
+      apt:
+        name: apache2
+        state: present
+
+    - name: Copie du fichier index
+      copy:
+        src: ./index.html
+        dest: /var/www/html/index.html
+        owner: www-data
+        group: www-data
+        mode: '0644'
