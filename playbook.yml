@@ -7,6 +7,7 @@
     - name: Mise à jour du cache apt
       apt:
         update_cache: yes
+      ignore_errors: yes
 
     - name: Installation de Apache2
       apt:
